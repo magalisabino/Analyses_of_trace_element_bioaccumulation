@@ -1,0 +1,178 @@
+SUMMARY
+1. Context and data availability
+2. Scripts structure
+3. Note on used packages
+4. Data structure
+5. Script content
+
+
+
+1. CONTEXT AND DATA AVAILABILITY
+All scripts presented here were used to compute results from the PhD thesis by Magali SABINO (2021) entitled "Bioaccumulation of trace elements in Seychelles marine food webs".
+The data used in these scripts are available from Nathalie BODIN (natbod@gmail.com) on reasonable request.
+
+
+
+2. SCRIPTS STRUCTURE
+Scripts are organised by chapter, with one script for each chapter of the thesis.
+
+The script "0_database_creation" is used to import, clean, organise and pre-treat the data frame containing all samples analysed during the PhD and used in data treatments. Then, in each script of each chapter, a subset of this database is used, with only the samples of interest.
+
+
+
+3. NOTE ON USED PACKAGES
+To install the last version of the nicheROVER package (v1.0.0.9000; see https://rdrr.io/github/mlysy/nicheROVER/ for more information), use the following code:
+
+install.packages("remotes")
+remotes::install_github("mlysy/nicheROVER")
+
+
+
+4. DATA STRUCTURE
+The entry database is organised as following: analysed individuals in line; related information (e.g. name of the species, coordinates of the sampling location, size of sampled individuals, etc) and data (d13C and d15N values, trace elements concentrations in µg/g ww and fatty acids in % of total fatty acids) in column.
+
+Available info/data are the following:
+
+organism_identifier: the name of each sampled individual; identifier is unique for each individual
+
+english_name/french_name/seychelles_creole_name/scientific_name: the English common name, French common name, Seychellois creole name or scientific name, respectively, of the species analysed
+
+c_sp_fao: the FAO code for the analysed species
+
+N: the number of samples analysed for each species
+
+family/order/classification: the family, order or general classification for each analysed species. Classification includes 'Cephalopod', 'Teleost fish', 'Elasmobranchs' and 'Crustaceans'.
+
+latitude/longitude: the coordinates for the sampling location.
+
+loc: the general location of sampling; either nearshore or offshore.
+
+funct_group: the functional group of each analysed species; includes 'Benthic teleost fish', 'Benthic cephalopod', 'Pelagic-neritic elasmobranchs', 'Demersal teleost fish', 'Pelagic-neritic teleost fish', 'Benthic crustacean', 'Pelagic-oceanic elasmobranchs', 'Pelagic-oceanic teleost fish'.
+
+fishery_type: the type of fishery (i.e. artisanal or semi-industrial) for each analysed species
+
+fishing_area: the type of location where sampled individuals were collected (i.e. reef, plateau or offshore)
+
+gear_code: the code corresponding to the gear used to capture individuals for each species
+
+distribution: the oceanic distribution of each analysed species
+
+migration: the migratory status (i.e. non-migratory, highly-migratory or unknown) of each analysed species
+
+vertical_habitat: the vertical habitat of the analysed species
+
+Habitat.3: the ecosystem type for each analysed species (i.e. Coral reefs, Sandy areas, Pelagic-neritic, Rocky and coral reefs, Diverse, Rocky reefs, Epipelagic, Bathypelagic, Benthopelagic)
+
+depth_range: depth range at which each analysed species is known to occur
+
+depth_preferred: preferred depth for each analysed species
+
+feeding1: the general feeding mode for each analysed species (carnivore vs herbivore)
+
+feeding2: the feeding mode for each analysed species (i.e. grazer, benthivore/scavanger, benthivore, benthopelagivore, pelagobenthivore, pelagivore opportunist, planktivore, scraper)
+
+date: the sampling date for each sampled individual
+
+season: the season during which analysed individuals were caught
+
+length: the length of each captured individual; includes mantle length for cephalopods, carapace length for crustaceans, lower jaw-fork length for swordfish and fork length for other fish species
+
+sex: the identified sex for each sampled individual
+
+water_p: the water content (%) for each individual or each species
+
+coeff_ww: the coefficient for conversion from dry weight to wet weight
+
+d13C/d15N: stable isotope values in permil for each analysed individual
+
+CN: the C:N ratio for each analysed individual
+
+TAs/Cd/Co/Cr/Cu/Fe/Mn/Ni/Pb/Se/V/Zn/Ag/THg: trace element concentrations in µg.g-1 dry weight
+
+Ag_ww/Cd_ww/Co_ww/Cr_ww/Cu_ww/Fe_ww/Mn_ww/Ni_ww/Pb_ww/Se_ww/TAs_ww/V_ww/Zn_ww/Hg_ww: trace element concentrations in µg.g-1 wet weight
+
+Ag_stat/Cd_stat/Co_stat/Cr_stat/Cu_stat/Fe_stat/Mn_stat/Ni_stat/Pb_stat/Se_stat/TAs_stat/V_stat/Zn_stat/THg_stat: trace elements concentrations for which values below the LOQ has been replaced by values drawn randomly from the interval ]0,LOQ[.
+
+
+
+5. SCRIPTS CONTENT
+
+"0_database_creation"
+Creation of the databases used in the PhD manuscript to compute all analyses. These databases include all samples collected from all species of interest; when only some (or just one) species were used for a chapter, a subset was created with only the data of interest in the dedicated script.
+
+"1_Chapter1_TEpatternsInCaptureFisheriesSpecies"
+Allows to reproduce all analyses of Chapter 1 dedicated to the identification of trace element concentrations patterns among Seychelles capture fisheries species. This script includes the following analyses :
+    - clustering on trace element profiles
+    - computing of ANOVA/Kruskal-Wallis tests and associated post-hoc tests
+    - plotting the composition of each group of species inferred from trace element profiles
+    - plotting d13C and d15N values in each group of species
+    - plotting nMDS using trace element profiles, stable isotope values and organisms length to
+      investigate intragroup variability
+
+"2_Chapter2_SpinyLobsters"
+Allows to reproduce all analyses of Chapter 2 dedicated to the trace element bioaccumulation in the three species of spiny lobsters (Pronghorn spiny lobster - Panulirus Penicillatus, longlegged spiny lobster - P. longipes and painted spiny lobster - P. Versicolor). This script includes the following analyses :
+    - computing of correlation tests
+    - computing of trace element profile ellipses, and calculation of associated metrics
+    - computing of t-tests/Wilcoxon tests and of ANOVA/Kruskal-Wallis tests and associated post-hocs
+    - computing of isotopic and fatty acid niches for each sex, habitat reef type and time period of habitat
+      degradation within each species, whenever possible
+
+"3_Chapter3_EmperorRedSnapper"
+Allows to reproduce all analyses of Chapter 3 dedicated to trace element bioaccumulation in Emperor red snapper (Lutjanus sebae) This script includes the following analyses :
+    - Correlation tests to test for relationship between size and SI, and among SI
+    - Statistical tests to test for significant difference in d13C or d15N between sexes and among seasons
+    - nMDS to visualise TE profiles for each sex and during each season
+    - Plot TE concentrations (mean SD) in each sex and during each season
+    - Statistical tests to test for significant difference in TE concentrations between
+      sexes and among seasons
+    - GLM and GAM models to test for relationships between TE concentrations and fork
+      length, d13C and d15N values + plotting GAM results
+    - Plotting mean fork length for each sex and each season
+    - Determining size at shift in trend in d13C/d15N relationship
+
+"4_Chapter4_SwordfishFromIndianOcean"
+Allows to reproduce all analyses of Chapter 4 dedicated to Hg and Se bioaccumulation in swordfish (Xiphias gladius) from the Indian Ocean. Includes complementary analysis used only in the related paper (Sabino et al. "Regional patterns in mercury (Hg) and selenium (Se) concentration of swordfish in the Indian Ocean"). This script includes the following analyses :
+    - Plotting the sampling locations across the Indian Ocean
+    - Calculation of MHg:MSe and HBVSe ratios, as well as theoretically available Se
+    - Statistical tests for significant difference in Hg, Se, length-stand. Hg
+      and theoretically available Se concentrations, d13C and d15N values, lower
+      jaw-fork length (LJFL), MHg:MSe and HBVSe among areas in the Indian Ocean
+    - Correlation test for relationship between log(Hg) and log(Se)
+    - Length-standardisation method for Hg concentrations
+    - Plot of Hg, Se, length-stand. Hg and theoretically available Se concentrations,
+      d13C and d15N values, lower jaw-fork length (LJFL), MHG:MSe and HBVSe ratios in
+      each sampling area
+    - Plot correlation between log(Hg) and log(Se)
+    - GAM to test relationship between Hg or Se concentrations and LJFL, d13C/d15N values
+      and longitude and latitude
+    - Calculation of number of servings to reach PTI and/or percentage of covered RDI
+      for children, young aduls and adults according to the sampling area
+
+"5_Chapter5_SwordfishFromSeychelles"
+Allows to reproduce all analyses of Chapter 5 dedicated to trace element bioaccumulation in swordfish (Xiphias gladius) from the Seychelles. This script includes the following analyses :
+    - Length-standardisation of TE concentrations for all TE for which concentrations are
+      correlated with LJFL
+    - Clustering according to FA profiles to identify FA trophic groups among all samples swordfish
+    - Correlation tests and plots to test for correlations between SI values and LJFL
+    - GAM models to identify contribution of physiological parameters, trophic ecology and season
+      in explaining TE bioaccumulation in swordfish
+    - GAM models with addition of interaction term "sex:d15N:length" to test for model improvement
+    - Test (+ associated plots) for significant difference in LJFL according to sex, FA trophic
+      group and season
+    - Test (+ associated plots) for significant difference in SI values according to sex,
+      FA trophic group and season
+    - Correlation tests (+ associated corrplot) for correlation among bioachemical tracers
+      (i.e. SI and FA)
+    - Calculation and plot of sex ratio by season
+
+"6_Chapter6_Risk-benefitAnalysis"
+Allows to reproduce all analyses of Chapter 6 dedicated to the risk-benefit analysis. This script includes the following analyses :
+    - Calculation of mean +/- SD TE concentrations for each species
+    - Calculation of MHg:MSe and HBVSe ratios to estimate interaction capacity between Hg and Se,
+      and estimation of theoretically bioavailable Hg and Se
+    - Estimation of risk-benefit or the consumption of Seychelles capture fisheries resources,
+      using %PTI and %RDI covered by one portion (calculated for each age class of interest)
+    - Estimation of iAs concentrations using TAs concentrations
+
+"7_model_choice_d13C_correction"
+Process of model selection for mathematical correction of d13C values in non-lipid-free swordfish samples.
